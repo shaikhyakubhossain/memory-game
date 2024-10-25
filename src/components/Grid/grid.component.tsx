@@ -3,13 +3,14 @@ export default function Grid() {
   const gridArr = [
     1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8
   ];
+  gridArr.sort(() => Math.random() - 0.5);
+
 
   let canClick: boolean = true;
   let prevBlock: HTMLSpanElement | null = null;
 
   const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
     const target = event.currentTarget as HTMLDivElement;
-    console.log(target.children[0]);
     if (!prevBlock) {
       target.children[0].classList.remove("hidden");
       prevBlock = target.children[0] as HTMLSpanElement;
@@ -26,6 +27,10 @@ export default function Grid() {
       if(!matched){
         prevBlock?.classList.add("hidden");
         current.classList.add("hidden");
+      }
+      else{
+        prevBlock?.parentElement?.classList.add("bg-green-400");
+        current.parentElement?.classList.add("bg-green-400");
       }
       canClick = true;
       prevBlock = null;
@@ -51,7 +56,7 @@ export default function Grid() {
             className="flex justify-center w-20 h-20 bg-red-500 border border-red-800 m-auto items-center hover:bg-red-400 cursor-pointer"
           >
             <span className="hidden">
-              {parseInt((Math.random() * 9 + 1).toString())}
+              {num}
             </span>
           </div>
         );
