@@ -4,6 +4,7 @@ export default function Grid() {
     1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8
   ];
 
+  let canClick: boolean = true;
   let prevBlock: HTMLSpanElement | null = null;
 
   const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -13,6 +14,7 @@ export default function Grid() {
       target.children[0].classList.remove("hidden");
       prevBlock = target.children[0] as HTMLSpanElement;
     } else{
+      canClick = false;
       target.children[0].classList.remove("hidden");
       hideDelay(target.children[0] as HTMLSpanElement);
     }
@@ -25,6 +27,7 @@ export default function Grid() {
         prevBlock?.classList.add("hidden");
         current.classList.add("hidden");
       }
+      canClick = true;
       prevBlock = null;
       }, 1000);
   }
@@ -43,7 +46,7 @@ export default function Grid() {
       {gridArr.map((num) => {
         return (
           <div
-            onClick={(event) => handleClick(event)}
+            onClick={(event) => canClick && handleClick(event)}
             key={num}
             className="flex justify-center w-20 h-20 bg-red-500 border border-red-800 m-auto items-center hover:bg-red-400 cursor-pointer"
           >
