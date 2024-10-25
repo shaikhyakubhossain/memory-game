@@ -1,7 +1,7 @@
 export default function Grid() {
 
   const gridArr = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+    1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8
   ];
 
   let prevBlock: HTMLSpanElement | null = null;
@@ -20,10 +20,22 @@ export default function Grid() {
 
   const hideDelay = (current: HTMLSpanElement) => {
     setTimeout(() => {
-      prevBlock?.classList.add("hidden");
-      current.classList.add("hidden");
+      const matched = checkWin(prevBlock?.textContent as string, current?.textContent as string);
+      if(!matched){
+        prevBlock?.classList.add("hidden");
+        current.classList.add("hidden");
+      }
       prevBlock = null;
       }, 1000);
+  }
+
+  const checkWin = (prev: string, current: string) => {
+    if (prev === current) {
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   return (
