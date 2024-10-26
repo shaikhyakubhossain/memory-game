@@ -47,13 +47,13 @@ export default function Grid() {
   }
 
   return (
-    <div className="grid grid-cols-4 w-80 h-80 mx-auto text-center text-3xl text-white">
+    <div className="grid grid-cols-4 w-80 h-80 mx-auto text-center text-3xl text-white my-4">
       {gridArr.map((num) => {
         return (
           <div
             onClick={(event) => canClick && handleClick(event)}
             key={num}
-            className="flex justify-center w-20 h-20 bg-red-500 border border-red-800 m-auto items-center hover:bg-red-400 cursor-pointer"
+            className="flex justify-center w-20 h-20 bg-slate-200 border-4 border-white rounded-lg items-center hover:bg-red-400 cursor-pointer"
           >
             <span className="hidden">
               {num}
