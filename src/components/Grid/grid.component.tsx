@@ -16,6 +16,9 @@ export default function Grid(props: propsType) {
 
   const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
     const target = event.currentTarget as HTMLDivElement;
+    if(target.classList.contains("!bg-green-400")) {
+      return;
+    }
     if (!prevBlock) {
       target.children[0].classList.remove("hidden");
       prevBlock = target.children[0] as HTMLSpanElement;
@@ -29,14 +32,13 @@ export default function Grid(props: propsType) {
   const hideDelay = (current: HTMLSpanElement) => {
     setTimeout(() => {
       const matched = checkWin(
-        prevBlock?.textContent as string,
-        current?.textContent as string
+        prevBlock,
+        current
       );
       if (!matched) {
         prevBlock?.classList.add("hidden");
         current.classList.add("hidden");
       } else {
-        console.log("color");
         prevBlock?.parentElement?.classList.add("!bg-green-400");
         current.parentElement?.classList.add("!bg-green-400");
       }
@@ -45,8 +47,8 @@ export default function Grid(props: propsType) {
     }, 1000);
   };
 
-  const checkWin = (prev: string, current: string) => {
-    if (prev === current) {
+  const checkWin = (prev: HTMLSpanElement | null, current: HTMLSpanElement | null) => {
+    if (prev?.textContent === current?.textContent && prev?.parentElement?.id !== current?.parentElement?.id) {
       return true;
     } else {
       return false;
@@ -84,6 +86,7 @@ export default function Grid(props: propsType) {
         return (
           <div
             onClick={(event) => canClick && handleClick(event)}
+            id={index.toString()}
             key={index}
             className="flex justify-center w-20 h-20 bg-slate-200 border-4 border-white rounded-lg items-center hover:bg-slate-300 cursor-pointer"
           >
