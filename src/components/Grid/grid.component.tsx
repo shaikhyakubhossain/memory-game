@@ -7,7 +7,8 @@ type propsType = {
 
 export default function Grid(props: propsType) {
 
-  const [gridArr, setGridArr] = useState<number[]>([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8].sort(() => Math.random() - 0.5));;
+  const [gridArr, setGridArr] = useState<number[]>([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8].sort(() => Math.random() - 0.5));
+  let correctBlockCount: number = 0;
 
   console.log(props.gridSize);
 
@@ -31,7 +32,7 @@ export default function Grid(props: propsType) {
 
   const hideDelay = (current: HTMLSpanElement) => {
     setTimeout(() => {
-      const matched = checkWin(
+      const matched = checkBlockMatch(
         prevBlock,
         current
       );
@@ -41,13 +42,17 @@ export default function Grid(props: propsType) {
       } else {
         prevBlock?.parentElement?.classList.add("!bg-green-400");
         current.parentElement?.classList.add("!bg-green-400");
+        correctBlockCount += 2;
+        if(correctBlockCount === gridArr.length) {
+          alert("You won!");
+        }
       }
       canClick = true;
       prevBlock = null;
     }, 1000);
   };
 
-  const checkWin = (prev: HTMLSpanElement | null, current: HTMLSpanElement | null) => {
+  const checkBlockMatch = (prev: HTMLSpanElement | null, current: HTMLSpanElement | null) => {
     if (prev?.textContent === current?.textContent && prev?.parentElement?.id !== current?.parentElement?.id) {
       return true;
     } else {
