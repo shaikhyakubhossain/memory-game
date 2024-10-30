@@ -1,12 +1,12 @@
 import './App.css'
-import Grid from './components/Grid/grid.component'
+import Game from './components/Game/game.component'
 
 function App() {
 
   return (
     <div className='flex flex-col justify-center h-dvh text-center'>
       <div className='text-4xl font-semibold'>Memory Game</div>
-      <Grid gridSize={4} />
+      <Game />
     </div>
   )
 }

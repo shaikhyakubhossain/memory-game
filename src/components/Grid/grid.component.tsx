@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Btn from "../Btn/btn.component";
 
 type propsType = {
@@ -14,6 +14,15 @@ export default function Grid(props: propsType) {
 
   let canClick: boolean = true;
   let prevBlock: HTMLSpanElement | null = null;
+
+  const generateGrid = () => {
+    const gridArr: number[] = [];
+    for(let i = 0; i < props.gridSize / 2; i++) {
+      gridArr.push(i + 1);
+      gridArr.push(i + 1);
+    }
+    setGridArr(gridArr.sort(() => Math.random() - 0.5));
+  }
 
   const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
     const target = event.currentTarget as HTMLDivElement;
@@ -60,13 +69,6 @@ export default function Grid(props: propsType) {
     }
   };
 
-  // const arrReSize = () => {
-  //   if
-  //   for(){
-
-  //   }
-  // }
-
   const resetGame = (event: React.MouseEvent<HTMLDivElement>) => {
     const prevSibling = event.currentTarget.previousSibling as HTMLDivElement;
     for (let i = 0; i < gridArr.length; i++) {
@@ -81,6 +83,12 @@ export default function Grid(props: propsType) {
     prevBlock = null;
     canClick = true;
   };
+
+  useEffect(() => {
+    if(props.gridSize >= 4){
+      generateGrid();
+    }
+  }, [props.gridSize])
 
   return (
     <>
