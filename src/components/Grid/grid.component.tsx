@@ -7,11 +7,9 @@ type propsType = {
 
 export default function Grid(props: propsType) {
 
-  const [gridArr, setGridArr] = useState<number[]>([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8].sort(() => Math.random() - 0.5));
+  const [gridArr, setGridArr] = useState<number[]>([]);
+
   let correctBlockCount: number = 0;
-
-  console.log(props.gridSize);
-
   let canClick: boolean = true;
   let prevBlock: HTMLSpanElement | null = null;
 
@@ -85,15 +83,16 @@ export default function Grid(props: propsType) {
   };
 
   useEffect(() => {
-    if(props.gridSize >= 4){
       generateGrid();
-    }
+    // console.log((20 * (Math.sqrt(props.gridSize))) * Math.sqrt(props.gridSize));
+    console.log(Math.sqrt(props.gridSize));
   }, [props.gridSize])
 
   return (
     <>
     <div
-      className="grid grid-cols-4 w-80 h-80 mx-auto text-center text-3xl text-black my-4"
+      className={`grid mx-auto text-center text-3xl text-black my-4`}
+      style={{ gridTemplateColumns: `repeat(${Math.sqrt(props.gridSize)}, 1fr)`, width: (20 * (Math.sqrt(props.gridSize))) * Math.sqrt(props.gridSize) + "px" }}
     >
       {gridArr.map((num, index) => {
         return (
