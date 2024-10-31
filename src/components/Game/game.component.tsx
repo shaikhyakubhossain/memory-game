@@ -6,7 +6,7 @@ export default function Game() {
   return (
     <div className="my-4">
       <div className="flex justify-center">
-        <Btn onClick={() => gridSize > 4 && setGridSize((Math.sqrt(gridSize) + 1) ** 2)}>Increment grid size</Btn>
+        <Btn onClick={() => setGridSize((Math.sqrt(gridSize) + 1) ** 2)}>Increment grid size</Btn>
         <Btn onClick={() => gridSize > 4 && setGridSize((Math.sqrt(gridSize) - 1) ** 2)}>Decrement grid size</Btn>
       </div>
       <div className="text-red-500">
