@@ -92,7 +92,7 @@ export default function Grid(props: propsType) {
     <>
     <div
       className={`grid mx-auto text-center text-3xl text-black my-4`}
-      style={{ gridTemplateColumns: `repeat(${Math.sqrt(props.gridSize)}, 1fr)`, width: (20 * (Math.sqrt(props.gridSize))) * Math.sqrt(props.gridSize) + "px" }}
+      style={{ gridTemplateColumns: `repeat(${Math.sqrt(props.gridSize)}, 1fr)`, width: 80 * Math.sqrt(props.gridSize) + "px"}}
     >
       {gridArr.map((num, index) => {
         return (
