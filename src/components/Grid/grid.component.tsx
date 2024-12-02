@@ -68,7 +68,7 @@ export default function Grid(props: propsType) {
   };
 
   const resetGame = (event: React.MouseEvent<HTMLDivElement>) => {
-    const prevSibling = event.currentTarget.previousSibling as HTMLDivElement;
+    const prevSibling = event.currentTarget.parentElement?.previousSibling as HTMLDivElement;
     for (let i = 0; i < gridArr.length; i++) {
       prevSibling.children[i].children[0].classList.add("hidden");
       prevSibling.children[i].classList.remove("!bg-green-400");
@@ -107,7 +107,10 @@ export default function Grid(props: propsType) {
         );
       })}
     </div>
+    <div className="flex justify-center">
     <Btn onClick={(event) => resetGame(event)}>Reset Game</Btn>
+    <a href="https://github.com/shaikhyakubhossain/memory-game"><Btn>Source Code</Btn></a>
+    </div>
     </>
   );
 }
